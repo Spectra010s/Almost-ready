@@ -1905,7 +1905,6 @@ s
 
              const gallery = document.getElementById("gallery-items");
              const totalImages = 22;
-             const folderPath = "Almost-ready/";
 
              for (let i = 1; i <= totalImages; i++) {
                const div = document.createElement("div");
@@ -1913,7 +1912,7 @@ s
                div.setAttribute("data-aos", "fade-up"); // AOS animation
 
                const img = document.createElement("img");
-               img.src = `${folderPath}event${i}.jpg`;
+               img.src = `event${i}.jpg`;
                img.alt = `Event ${i}`;
                img.loading = "lazy";
 
