@@ -1730,32 +1730,37 @@ s
             }
         }
 
-        // Navigation functions
-        function navigateToSection(sectionId) {
-            showLoader(() => {
-                // Hide all sections
-                sections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Show target section
-                const targetSection = document.getElementById(sectionId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
-                }
-                
-                // Update nav links
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                });
-                
-                const activeNavLink = document.querySelector(`[data-section="${sectionId}"]`);
-                if (activeNavLink) {
-                    activeNavLink.classList.add('active');
-                }
-                
-                currentSection = sectionId;
-                
+        // Navigation functionsfunction navigateToSection(sectionId) {
+      function navigateToSection(sectionId) {
+    showLoader(() => {
+    // Hide all sections
+    sections.forEach(section => section.classList.remove('active'));
+
+    // Show target section
+    const targetSection = document.getElementById(sectionId);
+     if (targetSection) {
+       targetSection.classList.add('active');
+     }
+
+    // Update nav links
+     navLinks.forEach(link => link.classList.remove('active'));
+     const activeLink = document.querySelector(`[data-section="${sectionId}"]`);
+     if (activeLink) {
+       activeLink.classList.add('active');
+    }
+
+    // Save current section and update hash
+       currentSection = sectionId;
+       window.location.hash = sectionId;
+
+       closeMobileMenu();
+       window.scrollTo(0, 0);
+
+          if (sectionId === 'reviews') {
+            loadReviews();
+          }
+        });
+       }
                 // Close mobile menu
                 closeMobileMenu();
                 
@@ -1902,11 +1907,6 @@ s
                  navigateToSection(sectionId);
                });
              });
-             // Check URL hash and navigate if present
-             const hash = window.location.hash.replace('#', '');
-             if (hash) {
-                 navigateToSection(hash);
-             }
               
              const gallery = document.getElementById("gallery-items");
              const totalImages = 22;
@@ -1939,6 +1939,12 @@ s
                   otherEventInput.value = "";
                 }
               });
+              
+              const hash = window.location.hash.replace('#', '');
+              if (hash && document.getElementById(hash)) {
+                navigateToSection(hash);
+               }
+             });
             });
 
             // Mobile menu toggle
